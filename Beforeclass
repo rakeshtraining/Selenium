@@ -1,0 +1,44 @@
+package testng;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class NewTest3 {
+	//ChromeDriver driver = new ChromeDriver();
+	WebDriver driver;
+	
+	@BeforeClass 
+	public void launch() {
+		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+		driver = new ChromeDriver();
+		System.out.println("Before class");
+	    driver.get("http://www.edureka.co");
+	    driver.manage().window();
+	}
+	
+  @Test
+  public void pass() {
+	  String x = driver.getTitle();
+	  System.out.print(x);
+	  Assert.assertEquals(x, x);	  
+  }
+  
+  @Test
+  public void fail() {
+	  String x = driver.getTitle();
+	  System.out.print(x);
+	  Assert.assertEquals(x, "Instructor led training" );	  
+  }
+  
+	@AfterClass
+	public void close() {
+		System.out.println("After class");
+		driver.close();
+	}
+}
